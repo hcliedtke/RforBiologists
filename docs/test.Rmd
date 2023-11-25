@@ -10,10 +10,9 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(base.dir = "/Users/jch/web/hcliedtke.github.io/", base.url = "/")
+knitr::opts_knit$set(base.dir = "~/Desktop/test/", base.url = "/")
 knitr::opts_chunk$set(fig.path = "images/")
 ```
-
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
