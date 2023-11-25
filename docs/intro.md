@@ -4,7 +4,7 @@ title: Intro
 nav_order: 2
 ---
 
-# Customization
+# Introduction
 {: .no_toc }
 
 ## Table of contents
@@ -15,4 +15,4 @@ nav_order: 2
 
 ---
 
-## Color schemes
+## Welcome to the Course!
