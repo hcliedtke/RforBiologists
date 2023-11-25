@@ -1,6 +1,7 @@
 ---
-layout: post
-title: Posting Rmarkdowns to your Jekyll website
+layout: default
+title: First Rmakrdown post
+nav_order: 3
 output:
   md_document:
     variant: markdown_github
@@ -33,7 +34,21 @@ summary(cars)
 
 You can also embed plots, for example:
 
-![](/images/pressure-1.png)
+    ## Warning in plot.window(...): "color" is not a graphical parameter
+
+    ## Warning in plot.xy(xy, type, ...): "color" is not a graphical parameter
+
+    ## Warning in axis(side = side, at = at, labels = labels, ...): "color" is not a
+    ## graphical parameter
+
+    ## Warning in axis(side = side, at = at, labels = labels, ...): "color" is not a
+    ## graphical parameter
+
+    ## Warning in box(...): "color" is not a graphical parameter
+
+    ## Warning in title(...): "color" is not a graphical parameter
+
+![](/../images/pressure-1.png)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to
 prevent printing of the R code that generated the plot.
