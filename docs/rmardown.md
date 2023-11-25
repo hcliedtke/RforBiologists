@@ -1,25 +1,17 @@
 ---
-title: Footnotes in `.Rmd` files
+layout: post
+title: Posting Rmarkdowns to your Jekyll website
 output:
   md_document:
-    variant: gfm
-    preserve_yaml: TRUE
-    pandoc_args: 
-      - "--wrap=preserve"
-knit: (function(inputFile, encoding) {
-  rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
-date: 2020-10-26
-permalink: /posts/2020/10/jeykll-footnotes
-excerpt_separator: <!--more-->
-toc: true
-tags:
-  - jekyll
-  - rmarkdown
+    variant: markdown_github
+    preserve_yaml: true
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(base.dir = "/Users/jch/web/hcliedtke.github.io/", base.url = "/")
+knitr::opts_chunk$set(fig.path = "images/")
 ```
 
 ## R Markdown
