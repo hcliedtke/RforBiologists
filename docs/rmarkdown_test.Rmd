@@ -12,7 +12,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(base.dir ="~/Documents/git_projects/RforBiologists/docs/", base.url = "/")
-knitr::opts_chunk$set(fig.path = "images/")
+knitr::opts_chunk$set(fig.path = "../images/")
 ```
 
 ## R Markdown
@@ -34,3 +34,20 @@ plot(pressure, pch=15, col="red")
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Include ggplot
+
+```{r}
+library(tidyverse)
+gg<-pressure %>%
+  ggplot(aes(x=temperature, y=pressure)) + 
+  geom_point()
+
+gg
+```
+## Include plotly
+
+```{r}
+library(plotly)
+ggplotly(gg)
+```
