@@ -34,21 +34,7 @@ summary(cars)
 
 You can also embed plots, for example:
 
-    ## Warning in plot.window(...): "color" is not a graphical parameter
-
-    ## Warning in plot.xy(xy, type, ...): "color" is not a graphical parameter
-
-    ## Warning in axis(side = side, at = at, labels = labels, ...): "color" is not a
-    ## graphical parameter
-
-    ## Warning in axis(side = side, at = at, labels = labels, ...): "color" is not a
-    ## graphical parameter
-
-    ## Warning in box(...): "color" is not a graphical parameter
-
-    ## Warning in title(...): "color" is not a graphical parameter
-
-![](/../images/pressure-1.png)
+![](/./images/pressure-1.png)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to
 prevent printing of the R code that generated the plot.
