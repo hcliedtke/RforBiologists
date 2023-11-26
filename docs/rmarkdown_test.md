@@ -37,7 +37,7 @@ summary(cars)
 
 You can also embed plots, for example:
 
-![](/../images/pressure-1.png)
+![](/images/pressure-1.png)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to
 prevent printing of the R code that generated the plot.
@@ -67,7 +67,7 @@ gg<-pressure %>%
 gg
 ```
 
-![](/../images/unnamed-chunk-1-1.png) \## Include plotly
+![](/images/unnamed-chunk-1-1.png) \## Include plotly
 
 ``` r
 library(plotly)
@@ -92,4 +92,4 @@ library(plotly)
 ggplotly(gg)
 ```
 
-![](/../images/unnamed-chunk-2-1.png)
+![](/images/unnamed-chunk-2-1.png)
