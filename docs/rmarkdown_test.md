@@ -37,7 +37,7 @@ summary(cars)
 
 You can also embed plots, for example:
 
-![](./images/pressure-1.png)
+![](/images/pressure-1.png)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to
 prevent printing of the R code that generated the plot.
@@ -67,7 +67,7 @@ gg<-pressure %>%
 gg
 ```
 
-![](./images/unnamed-chunk-1-1.png) \## Include plotly
+![](/images/unnamed-chunk-1-1.png) \## Include plotly
 
 ``` r
 library(plotly)
@@ -105,12 +105,28 @@ htmltools::tags$iframe(
 
 <iframe src="p1.html" scrolling="no" seamless="seamless" frameBorder="0"></iframe>
 
-## Include reactable
+## test widgetframe
 
 ``` r
-library(reactable)
-pressure %>%
-  reactable()
+library(widgetframe)
+
+frameWidget(p)
 ```
 
 ![](/images/unnamed-chunk-4-1.png)
+
+## Include DT
+
+``` r
+library(DT)
+dt <-  datatable(
+  head(iris, 20), 
+  options = list(
+     columnDefs = list(list(className = 'dt-center', targets = 5)),
+     pageLength = 5, lengthMenu = c(5, 10, 15, 20)),
+  fillContainer = T)
+
+frameWidget(dt, height = 350, width = '95%')
+```
+
+![](/images/unnamed-chunk-5-1.png)

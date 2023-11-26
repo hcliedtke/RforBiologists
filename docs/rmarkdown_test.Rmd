@@ -59,7 +59,7 @@ p<-ggplotly(gg)
 saveWidget(p, "p1.html", selfcontained = F, libdir = "lib")
 ```
 
-```{r}
+```{r fig.height=30}
 htmltools::tags$iframe(
   src = "p1.html", 
   scrolling = "no", 
@@ -69,12 +69,26 @@ htmltools::tags$iframe(
 ```
 
 
-## Include reactable
+## test widgetframe
 
 ```{r}
-library(reactable)
-pressure %>%
-  reactable()
+library(widgetframe)
 
+frameWidget(p)
+```
+
+
+## Include DT
+
+```{r}
+library(DT)
+dt <-  datatable(
+  head(iris, 20), 
+  options = list(
+     columnDefs = list(list(className = 'dt-center', targets = 5)),
+     pageLength = 5, lengthMenu = c(5, 10, 15, 20)),
+  fillContainer = T)
+
+frameWidget(dt, height = 350, width = '95%')
 ```
 
