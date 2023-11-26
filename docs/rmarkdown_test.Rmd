@@ -14,9 +14,10 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(base.dir ="~/Documents/git_projects/RforBiologists/docs/", base.url = "/")
+knitr::opts_knit$set(base.dir ="~/Documents/git_projects/RforBiologists/", base.url = "/")
 knitr::opts_chunk$set(fig.path = "images/")
-webshot::install_phantomjs()
+#install.packages("webshot")
+#webshot::install_phantomjs()
 ```
 
 ## R Markdown
@@ -53,5 +54,27 @@ gg
 
 ```{r}
 library(plotly)
-ggplotly(gg)
+library(htmlwidgets)
+p<-ggplotly(gg)
+saveWidget(p, "p1.html", selfcontained = F, libdir = "lib")
 ```
+
+```{r}
+htmltools::tags$iframe(
+  src = "p1.html", 
+  scrolling = "no", 
+  seamless = "seamless",
+  frameBorder = "0"
+)
+```
+
+
+## Include reactable
+
+```{r}
+library(reactable)
+pressure %>%
+  reactable()
+
+```
+

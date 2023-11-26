@@ -89,7 +89,28 @@ library(plotly)
     ##     layout
 
 ``` r
-ggplotly(gg)
+library(htmlwidgets)
+p<-ggplotly(gg)
+saveWidget(p, "p1.html", selfcontained = F, libdir = "lib")
 ```
 
-![](/images/unnamed-chunk-2-1.png)
+``` r
+htmltools::tags$iframe(
+  src = "p1.html", 
+  scrolling = "no", 
+  seamless = "seamless",
+  frameBorder = "0"
+)
+```
+
+<iframe src="p1.html" scrolling="no" seamless="seamless" frameBorder="0"></iframe>
+
+## Include reactable
+
+``` r
+library(reactable)
+pressure %>%
+  reactable()
+```
+
+![](/images/unnamed-chunk-4-1.png)
