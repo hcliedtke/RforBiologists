@@ -1,0 +1,35 @@
+---
+title: "RMarkdown: The better way to write scripts"
+subtitle: | 
+  R for Biologists
+author:
+- name: "H. Christoph Liedtke"
+  affiliation: "Biological Station Doñana - CSIC"
+date: '2023-12-08'
+output: webexercises::webexercises_default
+editor_options: 
+  chunk_output_type: console
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      message=FALSE,
+                      error=FALSE)
+knitr::opts_knit$set(root.dir = '../')
+library(webexercises)
+```
+
+
+```{r eval=TRUE}
+# set working directory
+setwd("~/Documents/git_projects/RforBiologists/")
+
+# install pacman if not already installed
+if (!require("pacman")) install.packages("pacman")
+
+# use pacman to load libraries
+#pacman::p_load()
+
+```
+
+

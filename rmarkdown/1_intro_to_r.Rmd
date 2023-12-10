@@ -1,0 +1,62 @@
+---
+title: "Course Outline"
+subtitle: | 
+  R for Biologists
+author:
+- name: "H. Christoph Liedtke"
+  affiliation: "Biological Station Doñana - CSIC"
+date: '2023-12-08'
+output: webexercises::webexercises_default
+editor_options: 
+  chunk_output_type: console
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      message=FALSE,
+                      error=FALSE)
+knitr::opts_knit$set(root.dir = '../')
+library(webexercises)
+```
+
+
+```{r eval=TRUE}
+# set working directory
+setwd("~/Documents/git_projects/RforBiologists/")
+
+```
+
+# What is R and why learn it?
+
+R is programming language geared towards (but not exclusively for) statistics. However, it has evolved to be much more and as Biologists, there are many reasons to learn it:
+
+* It is open source (and free!)
+* There is an expansive community and lots of help!
+* It is cross-platform (windows, linux, mac)
+* It is object-oriented and intuitive
+* It is always evolving
+* It is a one-stop-shop: libraries for many different types of analyses
+* It is widely used, even outside academia and one of the most popular languages for data science
+
+![](https://d14b9ctw0m6fid.cloudfront.net/ugblog/wp-content/uploads/2019/09/r-programming-language-blog-post.png)
+[source](https://www.upgrad.com/blog/why-learn-r-top-reasons-to-learn/)
+
+# What can I expect from this course?
+
+Learning any language does not happen over night and there is generally a steep learning curve. The same is true for R. Moreover, practice makes perfect. The idea of this course is to introduce you to the basic workings of R, with a biologist's interests in mind. Specifically, we will cover some basic statics and data visualization. Some parts may feel overwhelming, but hopefully, you will see the power of R. 
+
+# Course Outline
+  
+1. The basics: Introducing R and RStudio
+2. Making your first R notebook with R markdown.
+3. Leaving excel behind: Manipulating data with the Tidyverse
+4. Data Visualization
+5. Basic Statistics
+6. Bring your own Data
+
+
+
+
+
+
+

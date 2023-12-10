@@ -6,7 +6,6 @@ output:
   md_document:
     variant: markdown_github
     preserve_yaml: true
-always_allow_html: true
 editor_options: 
   chunk_output_type: console
 ---
@@ -130,3 +129,14 @@ frameWidget(dt, height = 350, width = '95%')
 ```
 
 ![](/images/unnamed-chunk-5-1.png)
+
+## include leaflet
+
+``` r
+library(leaflet)
+library(widgetframe)
+l <- leaflet() %>% addTiles() %>% setView(0,0,1)
+frameWidget(l, width='90%')
+```
+
+![](/images/leaflet-01-1.png)

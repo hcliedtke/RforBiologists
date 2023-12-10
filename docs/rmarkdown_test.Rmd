@@ -16,8 +16,9 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(base.dir ="~/Documents/git_projects/RforBiologists/", base.url = "/")
 knitr::opts_chunk$set(fig.path = "images/")
-#install.packages("webshot")
-#webshot::install_phantomjs()
+knitr::opts_chunk$set(widgetframe_self_contained = FALSE) # default = FALSE
+knitr::opts_chunk$set(widgetframe_isolate_widgets = TRUE) # default = TRUE
+knitr::opts_chunk$set(widgetframe_widgets_dir = 'widgets' )
 ```
 
 ## R Markdown
@@ -92,3 +93,12 @@ dt <-  datatable(
 frameWidget(dt, height = 350, width = '95%')
 ```
 
+## include leaflet
+
+
+```{r leaflet-01}
+library(leaflet)
+library(widgetframe)
+l <- leaflet() %>% addTiles() %>% setView(0,0,1)
+frameWidget(l, width='90%')
+```
