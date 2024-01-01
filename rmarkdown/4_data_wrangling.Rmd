@@ -1,0 +1,256 @@
+---
+title: "Leaving excel behind: Manipulating data with the Tidyverse"
+subtitle: | 
+  R for Biologists
+author:
+- name: "H. Christoph Liedtke"
+  affiliation: "Biological Station Doñana - CSIC"
+date: '2023-12-21'
+output: webexercises::webexercises_default
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      message=FALSE,
+                      error=FALSE)
+#knitr::opts_knit$set(root.dir = '../')
+```
+
+# Welcome to the Tidyverse
+
+The tidyverse is a collection of R packages, aimed at data scientists. They share the same "grammar" and so work seamlessly together. They are a powerful suit of functions that have quickly also become an essential tool-kit for biologists.
+
+![](../rmarkdown/img/tidyverse.png)
+
+The core packages are:
+
+-   readr: importing "rectangular" data (.csv, .tsv etc.). [Cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_data-import.pdf)
+-   dplyr: grammar (functions) for manipulating data. [Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+-   tidyr: grammar (functions) for organizing data. [Cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)
+-   ggplot2: grammar (functions) for plotting data. [Cheatsheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
+-   and many more: there are many more packages that deal with very specific data types such as character strings, dates, factors etc.
+
+Today we will run through a small project that will help us get familiar with the tidyverse. To do so, we will use some of the available datasets from [datacarpentry](https://datacarpentry.org/semester-biology/materials/datasets/).
+
+### 1. starting a new project R
+
+Lets get started by creating a new notebook! Let's call it **Mammal Body sizes**.
+
+### 2. Getting your data into R
+
+#### 2.1. Setting the working directory
+
+The very first thing we have to do when starting any project is to set your working directory! When working with a notebook, this will automatically be the place where your notebook is saved.
+
+```{r}
+# 
+setwd("~/Documents/git_projects/RforBiologists_UDSM/")
+
+# to check where you currently are:
+getwd()
+```
+
+We can also use relative paths:
+
+``` bash
+# home directory
+~/
+# one directory back 
+../
+```
+
+#### 2.2. Loading the libraries
+
+Usually we will work with functions outside of the R base packages so we will want to load them, like the tidyverse. If we have already installed them, we can just "attach" them, if not, we have to install them first.
+
+```{r}
+library("tidyverse")
+library("readxl")
+```
+
+Your data will usually be stored in some sort as some sort of rectangular format. Usually a table! You will tend to stored that as an excel spreadsheet, .csv or .tsv etc. Excel is to be avoided, because it usually comes with a lot of formatting that can sometimes cause problems. It also requires an extra library. For completeness we will look at an example too.
+
+Lets load our first dataset which is "tab separated data".
+
+```{r}
+mammals<-read_tsv(file = "../data/mammals_anage.tsv")
+# print the first few rows of this table:
+mammals
+```
+
+What kind of data do we see? How many variables (columns) are there and how many entries (rows)?
+
+-   This is a "tibble" (a table on steroids!)
+
+-   Structure (columns of different data types, 1349, 27 dimensions)
+
+-   Biological data
+
+-   some are strings (character), others are numerics
+
+-   Messy, lot's of missing data.
+
+In the same way we can load "comma separated" tables.
+
+```{r}
+dat2<-read_csv("../data/mammal_life_history.csv")
+```
+
+Excel tables require an extra step
+
+```{r}
+library(readxl)
+dat3<-read_xlsx("../data/bird_sizes.xlsx")
+```
+
+### 2. Exploring the data
+
+#### Exploring individual variables
+
+```{r}
+# printing a whole variable
+mammals$Family
+
+# printing just the unqiue variables
+unique(mammals$Family)
+
+# checking how many variables there are!
+## length of variable
+length(mammals$Family)
+## number of rows
+nrow(data)
+```
+
+So far, we have applied only single functions, but me way want to do two things at once. For example, getting only unique values from a variable, and then checking how many there are (i.e. unique() and then length()). The "traditional" way to do this in R is to nest functions:
+
+```{r}
+length(unique(mammals$Family))
+```
+
+This is not a very intuitive way to code, because you would work from the inside out and this can get quite messy quite quickly. The "tidy" way to to do this instead, is to use "pipes".
+
+```{r}
+mammals$Family %>% unique() %>% length()
+
+# pipes don't stop at the end of a line!
+
+mammals$Family %>%
+  unique() %>%
+  length()
+
+```
+
+isn't this a much nicer way to code?
+
+#### Selecting and filtering data
+
+This is a large table and you may only want to work with a few columns.
+
+```{r}
+mammals %>%
+  select(Genus, Species, `Maximum longevity (yrs)`)
+```
+
+you may want to sort data based on specific columns
+
+```{r}
+# single variable
+mammals %>%
+  select(Genus, Species, `Maximum longevity (yrs)`) %>%
+  arrange(`Maximum longevity (yrs)`)
+
+# or multiple and descending
+mammals %>%
+  select(Genus, Species, `Maximum longevity (yrs)`) %>%
+  arrange(Genus, desc(`Maximum longevity (yrs)`))
+```
+
+You can also use select to move columns around
+
+```{r}
+mammals %>%
+  select(Genus, Species, `Maximum longevity (yrs)`) %>%
+  select(`Maximum longevity (yrs)`, everything())
+```
+
+Lastly, we may only want to work with very specific family.
+
+```{r}
+mammals %>%
+  filter(Family=="Galagidae") %>%
+  select(Genus, Species, `Maximum longevity (yrs)`)
+```
+
+#### Summarizing variables
+
+Usually we will want to get some sort of summary statistcs from our data. Some functions exist to do very specific things, like count.
+
+```{r}
+mammals %>%
+  count(Order, sort=T)
+```
+
+However, the "summarize" family of functions are extremely useful because they can be applied in a very flexible manner.
+
+```{r}
+## on a single variable with a single statistic
+mammals %>%
+  summarise(mean_longevity=mean(`Maximum longevity (yrs)`, na.rm=T))
+  
+## on a single variable with multiple statistics
+mammals %>%
+  filter(Family=="Galagidae") %>%
+  summarize(mean_longevity=mean(`Maximum longevity (yrs)`, na.rm=T),
+            sd_longevity=sd(`Maximum longevity (yrs)`, na.rm=T),
+            N=n())
+```
+
+We may also want to do this for groups of data. For this we use `group_by()` which is extremely powerful especially when combined with `summarise()`.
+
+```{r}
+mammals %>%
+  group_by(Family) %>%
+  summarize(mean_longevity=mean(`Maximum longevity (yrs)`, na.rm=T),
+            sd_longevity=sd(`Maximum longevity (yrs)`, na.rm=T),
+            N=n())
+```
+
+#### Make a new variable
+
+"Mutate" is the last, important vocabulary we will address. This is extremely useful for making a new variable. The genus and species names are in separate columns, but often we may want to work with binomial names.
+
+```{r}
+mammals %>%
+  mutate(Sp=paste(Genus, Species, sep="_")) %>%
+  select(Genus, Species, Sp)
+```
+
+*NOTE:* although we just made this new variable, we did not save it. So if we go back and look in our original dataset, we would not see it. In order to make the changes to the dataset we would have to *overwrite* it.
+
+```{r}
+mammals<-mammals %>%
+  mutate(Sp=paste(Genus, Species, sep="_"))
+```
+
+#### 
+
+### 2. Exporting data
+
+At the end of every project, you most likely will want to export some data. The preferred way to do this for rectangular data (i.e. a table) is to save them as .csv or .tsv.
+
+```{r}
+# make a new object
+mammals_export<-
+  mammals %>%
+  group_by(Family) %>%
+  summarize(mean_longevity=mean(`Maximum longevity (yrs)`, na.rm=T),
+            sd_longevity=sd(`Maximum longevity (yrs)`, na.rm=T),
+            N=n())
+
+# write as .csv
+#write_csv(mammals_export, file="mammal_longevity.csv")
+
+```

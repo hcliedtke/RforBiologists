@@ -11,7 +11,7 @@ https://melbournebioinformatics.github.io/r-intro-biologists/intro_r_biologists.
 * How do I use it?
     - console vs. IDE
 * What are the basic building blocks?
-    - the R syntex (running code on single lines. spaces, comas, brackets, $, case sensitive)
+    - the R syntax (running code on single lines. spaces, comas, brackets, $, case sensitive)
     - Objects (Vectors!!, lists (many vectors) , matrix (a table of vectors) and many more)
     - Types of vectors (i.e. what can you store in a vector?) (character, numeric [integer, double], factor, logical, complex (e.g. a fucntion) )
         - ways to make sequences (1:10, seq(1:10), sample(n=10))
@@ -51,7 +51,7 @@ https://melbournebioinformatics.github.io/r-intro-biologists/intro_r_biologists.
 
 ## Data vizualization
 
-* GGplot and geoms (pie, bar, box, histogram, scatter, lines)
+* GGplot and geoms (pie, bar, box, histogram, scatter, lines, simple maps)
 * colouring by category
 * facetting
 * interactive plots with plotly
@@ -73,6 +73,12 @@ https://www.statmethods.net/stats/descriptives.html
 
 ## Bring your own data
 * bring your own data
+
+## Datasets
+
+https://datacarpentry.org/semester-biology/materials/datasets/
+https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html
+
 
 
 ## other possible subjects
